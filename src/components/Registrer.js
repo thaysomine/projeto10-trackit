@@ -1,16 +1,19 @@
-import styled from 'styled-components'
+import logo from "../assets/logo.svg";
+import styled from 'styled-components';
 
-import logo from './assets/logo.svg';
-
-export default function Login() {
+export default function Registrer() {
     return (
         <Div>  
             <img src={logo} alt="logo" />
-            <input type="text" placeholder="email" />
-            <input type="text" placeholder="senha" />
-            <button>Entrar</button>
-            <p>Não tem uma conta? Cadastre-se!</p>
-        </Div>     
+            <form>
+                <input type="text" placeholder="email" required />
+                <input type="text" placeholder="senha" required />
+                <input type="text" placeholder="nome" required />
+                <input type="text" placeholder="foto" required />
+                <button>Cadastrar</button>
+            </form>
+            <p>Já tem uma conta? Faça login!</p>
+        </Div>    
     )
 }
 
@@ -20,10 +23,15 @@ const Div = styled.div`
     justify-content: center;
     align-items: center;
     padding-top: 68px;
+    padding-bottom: 68px;
     img {
         width: 180px;
         height: auto;
         margin-bottom: 32px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
     }
     input {
         width: 303px;
@@ -37,7 +45,6 @@ const Div = styled.div`
         font-style: normal;
         font-weight: 400;
         font-size: 19.976px;
-        color: #D5D5D5;
     }
     button {
         width: 303px;

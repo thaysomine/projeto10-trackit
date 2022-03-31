@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { ThreeDots } from 'react-loader-spinner';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import "react-notifications/lib/notifications.css"
 import { useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom"
@@ -21,14 +23,14 @@ export default function Login() {
         promisse.then(response => {
             console.log(response);
         })
-        promisse.catch(error => {
-            console.log(error);
+        promisse.catch(() => {
             console.log("deu erro :)");
+            NotificationManager.error('Usuario e/ou senha incorreto(s)');
         })
     }
 
     return (
-        <Div>  
+        <Div> <NotificationContainer /> 
             <img src={logo} alt="logo" />
             <form onSubmit={sendData}>
                 <input className={isable} type="text" placeholder="email" disabled={loading.disabled} required onChange={(email) => setUserLogin({...userLogin, email:email.target.value})}/>
@@ -42,6 +44,7 @@ export default function Login() {
             <Link to={`/registrer`}>
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
+            
         </Div>     
     )
 }

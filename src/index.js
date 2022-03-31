@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './components/Login';
-import Registrer from './components/Registrer';
+import Signup from './components/Signup';
 
 import './style/reset.css';
 import './style/style.css';
@@ -12,7 +12,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/registrer" element={<Registrer />} />
+                <Route path="/signup" element={<Signup />} />
             </Routes>
         </BrowserRouter>
     );

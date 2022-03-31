@@ -1,11 +1,15 @@
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { ThreeDots } from 'react-loader-spinner';
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
 import axios from 'axios';
+import "react-notifications/lib/notifications.css"
 
 import logo from "../assets/logo.svg";
 
 export default function Signup() {
+    let navigate = useNavigate;
     const [userSignup, setUserSignup] = useState({
         email:"",
         name:"",
@@ -13,7 +17,7 @@ export default function Signup() {
         password:""
     });
     const [loading, setLoading] = useState({
-        load:"Entrar", 
+        load:"Cadastrar", 
         disabled:false, 
         class:"able"
     });
@@ -29,21 +33,28 @@ export default function Signup() {
         promisse.then(response => {
             const {data} = response;
             console.log(data);
-        })
+            navigate("/")
+        });
         promisse.catch(() => {
             console.log("deu erro :)");
-        })
+            NotificationManager.error('Preencha todos os campos corretamente');
+            setLoading({...loading, load:"carregando", disabled:false, class:"able"})
+        });
     }
 
     return (
-        <Div>  
+        <Div> <NotificationContainer />
             <img src={logo} alt="logo" />
             <form onSubmit={sendData}>
                 <input className={isable} type="text" disabled={loading.disabled} placeholder="email" required onChange={(email) => setUserSignup({...userSignup, email:email.target.value})} />
                 <input className={isable} type="text" disabled={loading.disabled} placeholder="senha" required onChange={(password) => setUserSignup({...userSignup, password:password.target.value})} />
                 <input className={isable} type="text" disabled={loading.disabled} placeholder="nome" required onChange={(name) => setUserSignup({...userSignup, name:name.target.value})} />
                 <input className={isable} type="text" disabled={loading.disabled} placeholder="foto" required onChange={(image) => setUserSignup({...userSignup, image:image.target.value})} />
-                <button>Cadastrar</button>
+                <button className={isable} disabled={loading.disabled}>{isable === "able" ? loading.load : <ThreeDots 
+                    color="white" 
+                    height={50} 
+                    width={50}
+                />}</button>
             </form>
             <Link to={`/`}>
                 <p>Já tem uma conta? Faça login!</p>
@@ -93,7 +104,9 @@ const Div = styled.div`
         font-weight: 400;
         font-size: 20.976px;
         line-height: 26px;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: #FFFFFF;   
     }  
     p {
@@ -103,5 +116,8 @@ const Div = styled.div`
         line-height: 17px;
         text-decoration-line: underline;
         color: #52B6FF;
+    }
+    .disable {
+        opacity: 0.7;
     }
 `;

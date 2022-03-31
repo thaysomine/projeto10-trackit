@@ -1,10 +1,13 @@
-import styled from 'styled-components'
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { ThreeDots } from 'react-loader-spinner';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
-import "react-notifications/lib/notifications.css"
 import { useState } from 'react';
-import axios from 'axios';
 import { Link } from "react-router-dom"
+import styled from 'styled-components'
+import axios from 'axios';
+import "react-notifications/lib/notifications.css"
+
+
+
 
 import logo from '../assets/logo.svg';
 
@@ -27,6 +30,7 @@ export default function Login() {
         promisse.catch(() => {
             console.log("deu erro :)");
             NotificationManager.error('Usuario e/ou senha incorreto(s)');
+            setLoading({...loading, load:"carregando", disabled:false, class:"able"});
         })
     }
 

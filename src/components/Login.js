@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { ThreeDots } from 'react-loader-spinner';
 import { useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom"
@@ -7,11 +8,16 @@ import logo from '../assets/logo.svg';
 
 export default function Login() {
     const [userLogin, setUserLogin] = useState({email:"", password:""});
-    
+    const [loading, setLoading] = useState({load:"Entrar", disabled:false, class:"able"});
+    let isable = loading.class;
+    console.log(isable)
+
     function sendData(e) {
         e.preventDefault()
+        setLoading({...loading, load:"carregando", disabled:true, class:"disable"})
         const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login`;
         const promisse = axios.post(URL, userLogin);
+
         promisse.then(response => {
             console.log(response);
         })
@@ -25,9 +31,13 @@ export default function Login() {
         <Div>  
             <img src={logo} alt="logo" />
             <form onSubmit={sendData}>
-                <input type="text" placeholder="email" required onChange={(email) => setUserLogin({...userLogin, email:email.target.value})}/>
-                <input type="text" placeholder="senha" required onChange={(password) => setUserLogin({...userLogin, password:password.target.value})}/>
-                <button>Entrar</button>
+                <input className={isable} type="text" placeholder="email" disabled={loading.disabled} required onChange={(email) => setUserLogin({...userLogin, email:email.target.value})}/>
+                <input className={isable} type="password" placeholder="senha" disabled={loading.disabled} required onChange={(password) => setUserLogin({...userLogin, password:password.target.value})}/>
+                <button className={isable} disabled={loading.disabled}>{isable === "able" ? loading.load : <ThreeDots 
+                    color="white" 
+                    height={50} 
+                    width={50}
+                />}</button>
             </form>
             <Link to={`/registrer`}>
                 <p>Não tem uma conta? Cadastre-se!</p>
@@ -76,8 +86,10 @@ const Div = styled.div`
         font-weight: 400;
         font-size: 20.976px;
         line-height: 26px;
-        text-align: center;
-        color: #FFFFFF;   
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #FFFFFF; 
     }  
     p {
         font-style: normal;
@@ -86,5 +98,8 @@ const Div = styled.div`
         line-height: 17px;
         text-decoration-line: underline;
         color: #52B6FF;
+    }
+    .disable {
+        opacity: 0.7;
     }
 `;

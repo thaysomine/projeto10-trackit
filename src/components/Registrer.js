@@ -1,5 +1,6 @@
 import logo from "../assets/logo.svg";
 import styled from 'styled-components';
+import { Link } from "react-router-dom"
 
 export default function Registrer() {
     return (
@@ -12,7 +13,9 @@ export default function Registrer() {
                 <input type="text" placeholder="foto" required />
                 <button>Cadastrar</button>
             </form>
-            <p>Já tem uma conta? Faça login!</p>
+            <Link to={`/`}>
+                <p>Já tem uma conta? Faça login!</p>
+            </Link>
         </Div>    
     )
 }

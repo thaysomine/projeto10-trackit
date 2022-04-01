@@ -1,17 +1,15 @@
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { ThreeDots } from 'react-loader-spinner';
 import { useState } from 'react';
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styled from 'styled-components'
 import axios from 'axios';
 import "react-notifications/lib/notifications.css"
 
-
-
-
 import logo from '../assets/logo.svg';
 
 export default function Login() {
+    const navigate = useNavigate();
     const [userLogin, setUserLogin] = useState({email:"", password:""});
     const [loading, setLoading] = useState({load:"Entrar", disabled:false, class:"able"});
     let isable = loading.class;
@@ -26,6 +24,7 @@ export default function Login() {
         promisse.then(response => {
             const {data} = response;
             console.log(data);
+            navigate("/today")
         })
         promisse.catch(() => {
             console.log("deu erro :)");

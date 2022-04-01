@@ -9,7 +9,7 @@ import "react-notifications/lib/notifications.css"
 import logo from "../assets/logo.svg";
 
 export default function Signup() {
-    let navigate = useNavigate;
+    let navigate = useNavigate();
     const [userSignup, setUserSignup] = useState({
         email:"",
         name:"",

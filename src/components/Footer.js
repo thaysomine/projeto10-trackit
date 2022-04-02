@@ -1,7 +1,5 @@
-import {
-    CircularProgressbar,
-    buildStyles
-} from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles} from "react-circular-progressbar";
+import { Link } from "react-router-dom"
 import "react-circular-progressbar/dist/styles.css";
 
 import styled from 'styled-components'
@@ -9,22 +7,28 @@ import styled from 'styled-components'
 export default function Footer() {
     return (
         <Div>
-            <p>Hábitos</p>
-            <div>
-                <CircularProgressbar
-                    value={50}
-                    text={"Hoje"}
-                    background
-                    backgroundPadding={6}
-                    styles={buildStyles({
-                    backgroundColor: "#52B6FF",
-                    textColor: "#fff",
-                    pathColor: "#fff",
-                    trailColor: "transparent"
-                    })}
-                />
-            </div>
-            <p>Histórico</p>
+            <Link to={`/habits`}>
+                <p>Hábitos</p>
+            </Link>
+            <Link to={`/today`}>
+                <div>
+                    <CircularProgressbar
+                        value={50}
+                        text={"Hoje"}
+                        background
+                        backgroundPadding={6}
+                        styles={buildStyles({
+                        backgroundColor: "#52B6FF",
+                        textColor: "#fff",
+                        pathColor: "#fff",
+                        trailColor: "transparent"
+                        })}
+                    />
+                </div>
+            </Link>
+            <Link to={`/historic`}>
+                <p>Histórico</p>
+            </Link>
         </Div>
     )
 }
@@ -42,6 +46,9 @@ const Div = styled.div`
     padding-left: 18px;
     padding-right:18px;
     box-sizing: border-box;
+    a:link {
+    text-decoration: none;
+    }   
     P {
         font-family: 'Lexend Deca';
         font-style: normal;

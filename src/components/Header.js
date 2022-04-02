@@ -1,12 +1,14 @@
-import styled from 'styled-components'
+import { useContext } from 'react';
 
-import teste from '../assets/imgteste.svg';
+import styled from 'styled-components';
+import UserContext from '../context/UserContext';
 
 export default function Header() {
+    const {img} = useContext(UserContext);
     return (
         <Div>
-            <h1>TrackIt</h1>
-            <img src={teste} alt="teste" />
+            <h1>Trackit</h1>
+            <img src={img} alt="teste" />
         </Div>
     )
 }

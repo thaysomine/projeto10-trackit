@@ -1,7 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
-
 import check from '../assets/checkbox.svg';
 
 export default function Today() {
@@ -14,20 +13,6 @@ export default function Today() {
                     <p>Nenhum hábito concluido ainda</p>
                 </Div>
                 <Container>
-                    <Tag>
-                        <Wrap>
-                            <h3>Ler 1 capítulo de livro</h3>
-                            <p>Sequência atual: 3 dias <br></br> Seu recorde: 5 dias</p>
-                        </Wrap>
-                        <img src={check} alt="checkbox" />
-                    </Tag>
-                    <Tag>
-                        <Wrap>
-                            <h3>Ler 1 capítulo de livro</h3>
-                            <p>Sequência atual: 3 dias <br></br> Seu recorde: 5 dias</p>
-                        </Wrap>
-                        <img src={check} alt="checkbox" />
-                    </Tag>
                     <Tag>
                         <Wrap>
                             <h3>Ler 1 capítulo de livro</h3>

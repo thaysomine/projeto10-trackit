@@ -1,19 +1,20 @@
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { ThreeDots } from 'react-loader-spinner';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom"
+
+import "react-notifications/lib/notifications.css"
 import styled from 'styled-components'
 import axios from 'axios';
-import "react-notifications/lib/notifications.css"
-
 import logo from '../assets/logo.svg';
+import UserContext from '../context/UserContext';
 
 export default function Login() {
     const navigate = useNavigate();
+    const setImgData = useContext(UserContext);
     const [userLogin, setUserLogin] = useState({email:"", password:""});
     const [loading, setLoading] = useState({load:"Entrar", disabled:false, class:"able"});
     let isable = loading.class;
-    console.log(isable)
 
     function sendData(e) {
         e.preventDefault()
@@ -21,9 +22,9 @@ export default function Login() {
         const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login`;
         const promisse = axios.post(URL, userLogin);
 
-        promisse.then(response => {
-            const {data} = response;
-            console.log(data);
+        promisse.then(({data}) => {
+            console.log(data.image);
+            setImgData.setImg(data.image)
             navigate("/today")
         })
         promisse.catch(() => {

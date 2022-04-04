@@ -26,7 +26,7 @@ export default function Habits() {
     days: [],
   });
   const {
-    userData: { token },
+    userData: { token }, 
   } = useContext(UserContext);
   const daysList = ["D", "S", "T", "Q", "Q", "S", "S"];
   console.log(token);
@@ -266,10 +266,11 @@ function renderCreateHabit(
 const Main = styled.main`
   width: 100%;
   min-width: 340px;
-  height: calc(100vh - 161px);
+  height: calc(100vh - 100px);
   background-color: #f2f2f2;
   margin-top: 70px;
   padding-top: 22px;
+  padding-bottom: 200px;
   p {
     padding-left: 18px;
     padding-right: 18px;

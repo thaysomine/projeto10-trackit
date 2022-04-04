@@ -12,11 +12,12 @@ import '../style/style.css';
 
 
 export default function App() {
-    //const [token, setToken] = useState(null);
-    const [userData, setUserData] = useState({})
+    const [userData, setUserData] = useState({});
+    const [habitsChecked, setHabitsChecked] = useState(0);
+    const [calc, setCalc] = useState(0);
     console.log(userData)
     return (
-        <UserContext.Provider value={{userData, setUserData}}>
+        <UserContext.Provider value={{userData, setUserData, calc, setCalc, habitsChecked, setHabitsChecked}}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Login />} />

@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 
 import UserContext from "../context/UserContext";
-import TodayHabits from "./TodayHabits";
 import Header from "./Header";
 import Footer from "./Footer";
+import check from '../assets/check.svg';
 import styled from "styled-components";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -16,27 +16,30 @@ export default function Today() {
     today = today[0].toUpperCase() + today.slice(1) 
 
     const [myHabitsToday, setMyHabitsToday] = useState([]);
-    const [concluded, setConcluded] = useState(0)
+    const [concluded, setConcluded] = useState(0);
     const {userData: { token }} = useContext(UserContext);
+    const setCalc = useContext(UserContext);
+    console.log(setCalc);
 
-    console.log(token)
+    console.log(myHabitsToday)
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
-    };
+    };                                                                                     
     
     useEffect(() => {
         const URL =
             "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
         const promisse = axios.get(URL, config);
-        promisse.then(({ data }) => {
+        promisse.then(({data}) => {
             console.log(data)
             setMyHabitsToday(data);
             console.log(myHabitsToday);
-            let i = 0
-            data.map(habit => {if (habit.done) i++})
-            setConcluded(i)
+            let i = 0;
+            data.map(habit => habit.done ? i++ : "")
+            setCalc.setCalc(i / data.length*100)
+            setConcluded(i);
         })
         promisse.catch((err) => console.log(err.response));
     }, []);
@@ -89,6 +92,10 @@ export default function Today() {
         }
     }
 
+    useEffect(() => {
+        setCalc.setCalc(concluded / myHabitsToday.length*100)
+    }, [concluded]);
+    console.log(setCalc.calc);
     return (
         <>
             <Header />
@@ -98,19 +105,27 @@ export default function Today() {
                     {concluded === 0 ? 
                         <p>Nenhum hábito concluido ainda</p>
                         : 
-                        <p className='concluded'>67% dos hábitos concluídos</p>
+                        <p className='concluded'>{setCalc.calc.toFixed(0)}% dos hábitos concluídos</p>
                     }
                 </Div>
                 <>
                     {myHabitsToday 
-                        ? myHabitsToday.map(habit => (
-                            <TodayHabits 
-                            passHabit={habit}
-                            myHabitsToday={myHabitsToday}
-                            checkDone={checkDone}
-                            key={habit.id}
-                            />
-                        ))
+                        ? myHabitsToday.map(habit => {
+                            console.log(habit)
+                            return(
+                                <Container>           
+                                <Tag >
+                                    <Wrap>
+                                        <h3>{habit.name}</h3>
+                                        <p>Sequência atual: {habit.currentSequence} dias <br></br> Seu recorde: {habit.highestSequence} dias</p>
+                                    </Wrap>
+                                    <div className={habit.done ? "checkbox check" : "checkbox"} onClick={() => {checkDone(habit.id, habit.done)}}>
+                                        <img src={check} alt="checkbox" />
+                                    </div>                         
+                                </Tag>
+                            </Container>
+                            )
+                        })
                     : ""}
                 </>
             </Main>
@@ -146,5 +161,48 @@ const Div = styled.div`
         color: #8FC549;
         font-size: 17.976px;
         line-height: 22px;
+    }
+`;
+const Container = styled.div`
+    padding-left: 18px;
+    padding-right: 18px;
+`;
+const Tag = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 13px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    .checkbox {
+        width: 69px;
+        height: 69px;
+        background: #EBEBEB;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .check {
+        background: #8FC549;
+    }
+    img {
+        width: 35px;
+        height: 28px;
+    }
+`;
+const Wrap = styled.div`
+    h3 {
+        font-weight: 400;
+        font-size: 19.976px;
+        line-height: 25px;
+        color: #666666;
+    }
+    p {
+        font-weight: 400;
+        font-size: 12.976px;
+        line-height: 16px;
+        color: #666666;
     }
 `;

@@ -7,13 +7,6 @@ export default function TodayHabits(props) {
     const {myHabitsToday: { id, name, done, currentSequence, highestSequence }, checkDone} = props;
     console.log(id);
 
-    //const [selectede, setConcluded] = useState({
-    //    count :0,
-    //    isCheck: true,
-    //})
-    //const checkState = concluded.isCheck;
-    //console.log(checkState);
-
     return (
         <Container>           
             <Tag >
@@ -21,7 +14,7 @@ export default function TodayHabits(props) {
                     <h3>{name}</h3>
                     <p>Sequência atual: {currentSequence} dias <br></br> Seu recorde: {highestSequence} dias</p>
                 </Wrap>
-                <div className="checkbox" onClick={() => {checkDone(id, done)}}>
+                <div className="checkbox" onClick={() => {console.log("eviar p api");}}>
                     <img src={check} alt="checkbox" />
                 </div>                         
             </Tag>
@@ -70,4 +63,5 @@ const Wrap = styled.div`
         font-size: 12.976px;
         line-height: 16px;
         color: #666666;
+    }
 `;

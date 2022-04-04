@@ -22,7 +22,9 @@ const Main = styled.main`
     height: 100vh;
     background-color: #F2F2F2;
     padding-top: 100px;
-    padding-bottom: 100px;
+    padding-left: 18px;
+    padding-right: 18px;
+    box-sizing: border-box;
         p {
         font-weight: 400;
         font-size: 17.976px;
@@ -32,8 +34,6 @@ const Main = styled.main`
     }
 `;
 const Div = styled.div`
-    padding-left: 18px;
-    padding-right: 18px;
     h2 {
         font-weight: 400;
         font-size: 22.976px;

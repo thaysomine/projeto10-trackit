@@ -1,10 +1,13 @@
 import { CircularProgressbar, buildStyles} from "react-circular-progressbar";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom"
 import "react-circular-progressbar/dist/styles.css";
 
 import styled from 'styled-components'
+import UserContext from "../context/UserContext";
 
 export default function Footer() {
+    const setCalc = useContext(UserContext);
     return (
         <Div>
             <Link to={`/habits`}>
@@ -13,7 +16,7 @@ export default function Footer() {
             <Link to={`/today`}>
                 <div>
                     <CircularProgressbar
-                        value={50}
+                        value={setCalc.calc}
                         text={"Hoje"}
                         background
                         backgroundPadding={6}

@@ -30,7 +30,7 @@ export default function Login() {
         promisse.catch(() => {
             console.log("deu erro :)");
             NotificationManager.error('Usuario e/ou senha incorreto(s)');
-            setLoading({...loading, load:"carregando", disabled:false, class:"able"});
+            setLoading({...loading, load:"Entrar", disabled:false, class:"able"});
         })
     }
 
@@ -50,7 +50,7 @@ export default function Login() {
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
             
-        </Div>     
+        </Div>  
     )
 }
 

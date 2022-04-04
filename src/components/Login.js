@@ -11,7 +11,7 @@ import UserContext from '../context/UserContext';
 
 export default function Login() {
     const navigate = useNavigate();
-    const setImgData = useContext(UserContext);
+    const setUserData = useContext(UserContext);
     const [userLogin, setUserLogin] = useState({email:"", password:""});
     const [loading, setLoading] = useState({load:"Entrar", disabled:false, class:"able"});
     let isable = loading.class;
@@ -24,7 +24,7 @@ export default function Login() {
 
         promisse.then(({data}) => {
             console.log(data.image);
-            setImgData.setImg(data.image)
+            setUserData.setUserData(data)
             navigate("/today")
         })
         promisse.catch(() => {

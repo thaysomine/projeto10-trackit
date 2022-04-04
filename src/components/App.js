@@ -13,10 +13,10 @@ import '../style/style.css';
 
 export default function App() {
     //const [token, setToken] = useState(null);
-    const [img, setImg] = useState({})
-    //console.log(img)
+    const [userData, setUserData] = useState({})
+    console.log(userData)
     return (
-        <UserContext.Provider value={{img, setImg}}>
+        <UserContext.Provider value={{userData, setUserData}}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Login />} />

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import UserContext from '../context/UserContext';
 
 export default function Header() {
-    const {img} = useContext(UserContext);
+    const {userData: {image}} = useContext(UserContext);
     return (
         <Div>
             <h1>Trackit</h1>
-            <img src={img} alt="teste" />
+            <img src={image} alt="teste" />
         </Div>
     )
 }
@@ -27,6 +27,7 @@ const Div = styled.div`
     padding-right:18px;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    z-index: 1;
     h1 {
         font-family: 'Playball';
         font-style: normal;
